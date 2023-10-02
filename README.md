@@ -160,7 +160,7 @@ My name is Felipe Scherer. You can find my socials at [my Github profile](https:
 [issues-shield]: https://img.shields.io/github/issues/fescherer/snippets.svg?style=for-the-badge
 [issues-url]: https://github.com/fescherer/snippets/issues
 [license-shield]: https://img.shields.io/github/license/fescherer/snippets.svg?style=for-the-badge
-[license-url]: https://github.com/fescherer/snippets/blob/master/LICENSE.md
+[license-url]: https://github.com/fescherer/snippets/blob/master/LICENSE
 
 [Python 3]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [python-url]: https://www.python.org
