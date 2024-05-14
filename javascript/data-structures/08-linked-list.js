@@ -38,7 +38,7 @@ class LinkedList {
         return this.size
     }
 
-    // O(n)
+    // O(1)
     prepend(value) {
         const node = new Node(value)
         if(!this.isEmpty()) node.next = this.head
@@ -80,13 +80,13 @@ class LinkedList {
 
     removeFrom(index) {
         if(index < 0 || index >= this.size) {
-            return null
+            return null 
         } 
 
         let removeNode
         if(index === 0) {
             removeNode = this.head
-            this.head = this.head.next
+            this.head = this.head.next // O(1)
         } else {
             let prev = this.head
             for(let i = 0; i < index - 1; i++) {
@@ -97,6 +97,58 @@ class LinkedList {
         }
         this.size--
         return removeNode.value
+    }
+
+    removeValue(value) {
+        if(this.isEmpty()) {
+            return null // O(1)
+        }
+        if(this.head.value === value) {
+            this.head = this.head.next
+            this.size--
+            return value
+        } else {
+            let prev = this.head
+            while(prev.next && prev.next.value !== value) {
+                prev = prev.next
+            }
+            if(prev.next) {
+                const removeNode = prev.next
+                prev.next = removeNode.next
+                this.size--
+                return value
+            }
+            return null
+        }
+        
+    }
+
+    search(value) {
+        if(this.isEmpty()) {
+            return -1
+        }
+        let i=0
+        let curr = this.head
+        while(curr) {
+            if(curr.value === value) {
+                return i
+            }
+            curr = curr.next
+            i++
+        }
+        return -1
+    }
+
+    reverse() {
+        let prev = null
+        let curr = this.head
+        while(curr) {
+            let next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        }
+        this.head = prev
     }
 
     print() {
@@ -133,4 +185,12 @@ list.insert(345,3)
 list.print()
 
 console.log(list.removeFrom(1))
+list.print()
+
+console.log(list.removeValue(222))
+list.print()
+
+console.log(list.search(10))
+
+list.reverse()
 list.print()
