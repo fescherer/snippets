@@ -1,15 +1,15 @@
 const LinkedList = require('./09-linked-list-with-tail')
 
-class LinkedListStack {
+class LinkedListQueue {
     constructor() {
         this.list = new LinkedList()
     }
 
-    push(value) {
-        this.list.prepend(value)
+    enqueue(value) {
+        this.list.append(value)
     }
 
-    pop() {
+    dequeue() {
         return this.list.removeFromFront()
     }
 
@@ -30,15 +30,15 @@ class LinkedListStack {
     }
 }
 
-const stack = new LinkedListStack()
-console.log('Is empty', stack.isEmpty())
+const queue = new LinkedListQueue()
+console.log('Is empty', queue.isEmpty())
 
-stack.push(20)
-stack.push(10)
-stack.push(3)
+queue.enqueue(20)
+queue.enqueue(10)
+queue.enqueue(3)
 
-console.log(stack.getSize())
-stack.print()
+console.log(queue.getSize())
+queue.print()
 
-console.log(stack.pop())
-console.log(stack.peek())
+console.log(queue.dequeue())
+console.log(queue.peek())
