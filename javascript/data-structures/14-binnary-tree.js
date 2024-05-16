@@ -57,7 +57,7 @@ class BinarySearchTree {
             }
         }
     }
-
+  
     search(root, value) {
         if(!root) {
             return false
@@ -71,6 +71,112 @@ class BinarySearchTree {
             }
         }
     }
+
+    // Tree Traversal- 2 types- Depth First Search (DFS) and Breadth First Search (BFS)
+    
+    // DFS
+    // Start at the root and explores as far as possible until branch comes to end
+    // 3 types- Preorder, Inorder and Postorder- which order is exploring, right-left, left-right etc
+    dfsPreOrder(root) {
+        // Read the data from node
+        // Visit left subtree
+        // Visit right subtree
+        if(root) {
+            console.log(root.value)
+            this.dfsPreOrder(root.left)
+            this.dfsPreOrder(root.right)
+        }
+    }
+
+    dfsInOrder(root) {
+        // Visit the left subtree
+        // Read the data from node
+        // Visit the right subtree
+        if (root) {
+            this.dfsInOrder(root.left)
+            console.log(root.value)
+            this.dfsInOrder(root.right)
+        }
+    }
+
+    dfsPostOrder(root) {
+        // Visit left subtree
+        // Visit right subtree
+        // Read the data from node
+        if(root) {
+            this.dfsPostOrder(root.left)
+            this.dfsPostOrder(root.right)
+            console.log(root.value)
+        }
+    }
+
+    // BFS
+    // Create a queue
+    // Enqueue the root node
+    // As long as a node exists in the queue
+    //  - Dequeue the node from the front
+    //  - Read the node's value
+    //  - Enqueue the node's left child if it exists
+    //  - Enqueue the node's right child if it exists
+    bfs() {
+        const queue = []
+        queue.push(this.root)
+        while(queue.length) {
+            let curr = queue.shift()
+            console.log(curr.value)
+            if(curr.left) {
+                queue.push(curr.left)
+            }
+            if(curr.right) {
+                queue.push(curr.right)
+            }
+        }
+    }
+
+    min(root) {
+        // The minimum value will be the leaf at leftest
+        if(!root.left) {
+            return root.value
+        } else {
+            return this.min(root.left)
+        }
+    }
+
+    max(root) {
+        // The maximum value will be the leaf at rightest
+        if(!root.right) {
+            return root.value
+        } else {
+            return this.max(root.right)
+        }
+    }
+
+    delete(value) {
+        this.root = this.deleteNode(this.root, value)    
+    }
+
+    deleteNode(root, value) {
+        if(root === null) {
+            return root
+        }
+        if(value < root.value) {
+            root.left = this.deleteNode(root.left, value)
+        } else if(value > root.value) {
+            root.right = this.deleteNode(root.right, value)
+        } else {
+            if(!root.left && !root.right) {
+                return null
+            }
+            if(!root.left) {
+                return root.right
+            } else if (!root.right) {
+                return root.left
+            }
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right, root.value)
+        }
+        return root
+    }
 }
 
 const bst = new BinarySearchTree()
@@ -78,5 +184,17 @@ const bst = new BinarySearchTree()
 console.log('Tree is empty?', bst.isEmpty())
 
 bst.insert(10)
-bst.insert(500)
 bst.insert(5)
+bst.insert(15)
+bst.insert(3)
+bst.insert(7)
+
+// bst.dfsPreOrder(bst.root)
+// bst.dfsInOrder(bst.root)
+// bst.dfsPostOrder(bst.root)
+// bst.bfs()
+// console.log(bst.min(bst.root))
+// console.log(bst.max(bst.root))
+
+bst.delete(15)
+bst.bfs()
